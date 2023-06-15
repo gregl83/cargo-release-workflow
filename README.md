@@ -9,4 +9,3 @@ Demonstrate a GitHub Build and Release action workflow for Cargo projects.
 ## License
 
 [MIT](LICENSE)
-``
