@@ -1,5 +1,6 @@
 [package]
 name = "cargo-release-workflow"
+description = "Cargo Release Workflow."
 version = "0.1.0"
 edition = "2021"
 
