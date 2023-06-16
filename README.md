@@ -10,6 +10,8 @@ Demonstrate a GitHub Build and Release workflow for Cargo projects.
 
 ## Workflow Steps
 
+Triggered by a `git push` of a new tag using Semver 2.0.
+
 ### 1. Test
 
 Runs `cargo test` in parallel with `Build` step.
