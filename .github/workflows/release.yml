@@ -70,6 +70,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ubuntu-latest-release
-            macOS-latest-release
-            windows-latest-release
+            ./ubuntu-latest-release
+            ./macOS-latest-release
+            ./windows-latest-release

@@ -1,4 +1,4 @@
-![Build](https://github.com/gregl83/cargo-release-workflow/actions/workflows/release.yml/badge.svg)
+![Build](https://img.shields.io/github/actions/workflow/status/gregl83/cargo-release-workflow/release.yml)
 ![Release](https://img.shields.io/github/v/release/gregl83/cargo-release-workflow)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gregl83/cargo-release-workflow/blob/master/LICENSE)
 # cargo-release-workflow
