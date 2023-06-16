@@ -73,6 +73,7 @@ jobs:
         with:
           draft: false
           prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             bin/ubuntu-latest-release
             bin/macOS-latest-release
