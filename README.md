@@ -2,11 +2,11 @@
 
 Cargo Release Workflow.
 
-Build Rust binaries with Cargo and publish them alongside GitHub Releases.
+Build Rust binaries with Cargo and publish them using GitHub Releases.
 
 ## Purpose
 
-Demonstrate a GitHub Build and Release action workflow for Cargo projects.
+Demonstrate a GitHub Build and Release workflow for Cargo projects.
 
 ## Workflow Steps
 
