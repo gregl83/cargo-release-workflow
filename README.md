@@ -1,3 +1,6 @@
+![Build](https://github.com/gregl83/cargo-release-workflow/actions/workflows/release.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/gregl83/cargo-release-workflow)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gregl83/cargo-release-workflow/blob/master/LICENSE)
 # cargo-release-workflow
 
 Cargo Release Workflow.
@@ -25,7 +28,7 @@ Runs `cargo test` in parallel with `Build` step.
 *If a test fails, this step will prevent a release.*
 
 ### 2. Build
-
+Workflow 
 Runs `cargo build --release` in parallel with `Test` step.
 
 Builds binary artifacts for Linux, MacOS, and Windows targets.
