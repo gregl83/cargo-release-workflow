@@ -63,6 +63,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            target/release/ubuntu-latest-release
-            target/release/macOS-latest-release
-            target/release/windows-latest-release
+            ubuntu-latest-release
+            macOS-latest-release
+            windows-latest-release
