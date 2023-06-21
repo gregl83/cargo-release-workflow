@@ -72,20 +72,24 @@ jobs:
       - name: Set Build File Variables
         id: vars
         run: |
+          name=$(grep -E '^name\s*=\s*".+"' Cargo.toml | awk -F '"' '{print $2}')
+          echo "name=$name" >> $GITHUB_OUTPUT
           os="${{ matrix.os }}"
           os_sans_latest=$(echo "$os" | sed 's/-latest//')
-          echo "::set-output name=os::$os_sans_latest"
+          echo "os=$os_sans_latest" >> $GITHUB_OUTPUT
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            echo "::set-output name=ext::.exe"
+            echo "ext=.exe" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=ext::"
+            echo "ext=" >> $GITHUB_OUTPUT
           fi
 
       - name: Prepare Artifacts
         run: |
+          source=${{ matrix.os }}-${{ matrix.architecture }}/${{ steps.vars.outputs.name }}${{ steps.vars.outputs.ext }}
+          target=bin/${{ steps.vars.outputs.name }}-${{ steps.vars.outputs.os }}-${{ matrix.architecture }}${{ steps.vars.outputs.ext }}
           mkdir bin
-          
-          mv ${{ matrix.os }}-${{ matrix.architecture }}/cargo-release-workflow${{ steps.vars.outputs.ext }} bin/${{ steps.vars.outputs.os }}-${{ matrix.architecture }}${{ steps.vars.outputs.ext }}
+          mv $source $target
+          chmod +x $target
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -95,4 +99,4 @@ jobs:
           prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            bin/${{ steps.vars.outputs.os }}-${{ matrix.architecture }}${{ steps.vars.outputs.ext }}
+            bin/${{ steps.vars.outputs.name }}-${{ steps.vars.outputs.os }}-${{ matrix.architecture }}${{ steps.vars.outputs.ext }}
