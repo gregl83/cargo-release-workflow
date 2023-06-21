@@ -69,10 +69,21 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v3
 
+      - name: Set Build File Variables
+        id: vars
+        run: |
+          echo "::set-output name=os::${matrix.os%-latest}"
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            echo "::set-output name=ext::.exe"
+          else
+            echo "::set-output name=ext::"
+          fi
+
       - name: Prepare Artifacts
         run: |
           mkdir bin
-          mv ${{ matrix.os }}-${{ matrix.architecture }}/cargo-release-workflow bin/${{ matrix.os }}-${{ matrix.architecture }}
+          
+          mv ${{ matrix.os }}-${{ matrix.architecture }}/cargo-release-workflow${{ steps.vars.outputs.ext }} bin/${{ steps.vars.outputs.os }}-${{ matrix.architecture }}${{ steps.vars.outputs.ext }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -82,4 +93,4 @@ jobs:
           prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            bin/${{ matrix.os }}-${{ matrix.architecture }}
+            bin/${{ steps.vars.outputs.os }}-${{ matrix.architecture }}${{ steps.vars.outputs.ext }}
