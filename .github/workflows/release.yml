@@ -37,6 +37,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
+        architecture: [x64, x86]
         toolchain: [stable]
     steps:
       - uses: actions/checkout@v3
@@ -47,7 +48,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.os }}-release
+          name: ${{ matrix.os }}-${{ matrix.architecture }}
           path: target/release/
 
   release:
@@ -55,6 +56,11 @@ jobs:
       - test
       - build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macOS-latest ]
+        architecture: [ x64, x86 ]
+        toolchain: [ stable ]
     permissions:
       contents: write
     steps:
@@ -66,9 +72,7 @@ jobs:
       - name: Prepare Artifacts
         run: |
           mkdir bin
-          mv ubuntu-latest-release/cargo-release-workflow bin/ubuntu-latest-release
-          mv macOS-latest-release/cargo-release-workflow bin/macOS-latest-release
-          mv windows-latest-release/cargo-release-workflow.exe bin/windows-latest-release.exe
+          mv ${{ matrix.os }}-${{ matrix.architecture }}/cargo-release-workflow bin/${{ matrix.os }}-${{ matrix.architecture }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -78,6 +82,4 @@ jobs:
           prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            bin/ubuntu-latest-release
-            bin/macOS-latest-release
-            bin/windows-latest-release.exe
+            bin/${{ matrix.os }}-${{ matrix.architecture }}
