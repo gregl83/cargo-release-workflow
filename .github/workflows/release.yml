@@ -72,7 +72,8 @@ jobs:
       - name: Set Build File Variables
         id: vars
         run: |
-          echo "::set-output name=os::${matrix.os%-latest}"
+          os="${{matrix.os%-latest}}"
+          echo "::set-output name=os::${{os}}"
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
             echo "::set-output name=ext::.exe"
           else
