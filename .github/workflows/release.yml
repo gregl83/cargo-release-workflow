@@ -89,7 +89,6 @@ jobs:
           target=bin/${{ steps.vars.outputs.name }}-${{ steps.vars.outputs.os }}-${{ matrix.architecture }}${{ steps.vars.outputs.ext }}
           mkdir bin
           mv $source $target
-          chmod +x $target
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
