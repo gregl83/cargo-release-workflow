@@ -24,6 +24,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
+        architecture: [x64, x86]
         toolchain: [stable]
     steps:
       - uses: actions/checkout@v3
